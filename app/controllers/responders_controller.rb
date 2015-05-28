@@ -2,17 +2,15 @@ class RespondersController < ApplicationController
 
   def create
     begin
-      params = responder_params
-      @responder = Responder.new()
+      @responder = Responder.new(responder_params)
       respond_to do |format|
         if @responder.save
-          puts "OK"
           format.html
-          format.json { render json: @responder.to_json, status: 201 }
+          format.json { render json:
+            { 'responder' => {'type' => @responder.type, 'emergency_code' => @responder.emergency_code, 'name' => @responder.name, 'capacity' => @responder.capacity, 'on_duty' => @responder.on_duty } }, status: 201 }
         else
-          puts "NOT OK"
           format.html
-          format.json { render json: @responder.to_json, status: 422 }
+          format.json { render json: { 'message' => @responder.errors }, status: 422 }
         end
       end
     rescue Exception => e
@@ -35,7 +33,7 @@ class RespondersController < ApplicationController
 private
 
   def responder_params
-    params.require(:responder).permit(:type, :name, :capacity, :on_duty, :emergency_code)
+    params.require(:responder).permit(:type, :name, :capacity)
   end
 
 end
