@@ -19,12 +19,9 @@ class RespondersController < ApplicationController
         format.json { render json: { 'message' => e.message }, status: 422 }
       end
     end
-
-
   end
 
   def update
-
   end
 
   def destroy
@@ -35,5 +32,4 @@ private
   def responder_params
     params.require(:responder).permit(:type, :name, :capacity)
   end
-
 end
