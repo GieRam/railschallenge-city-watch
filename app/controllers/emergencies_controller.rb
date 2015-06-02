@@ -1,12 +1,12 @@
 class EmergenciesController < ApplicationController
   def create
     begin
-      @emergency = Responder.new(emergency_params)
+      @emergency = Emergency.new(emergency_params)
       respond_to do |format|
         if @emergency.save
           format.html
           format.json { render json:
-            { 'emergency' => {'type' => @emergency.type, 'emergency_code' => @emergency.emergency_code, 'name' => @emergency.name, 'capacity' => @emergency.capacity, 'on_duty' => @emergency.on_duty } }, status: 201 }
+            { 'emergency' => {'code' => @emergency.code, 'fire_severity' => @emergency.fire_severity, 'police_severity' => @emergency.police_severity, 'medical_severity' => @emergency.medical_severity } }, status: 201 }
         else
           format.html
           format.json { render json: { 'message' => @emergency.errors }, status: 422 }
