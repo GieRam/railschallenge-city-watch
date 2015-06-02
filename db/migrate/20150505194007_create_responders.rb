@@ -5,5 +5,7 @@ class CreateResponders < ActiveRecord::Migration
       t.string :name, primary_key: true
       t.integer :capacity
     end
+
+    add_index :responders, :name, unique: true
   end
 end
