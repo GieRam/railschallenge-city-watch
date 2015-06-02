@@ -14,22 +14,18 @@
 ActiveRecord::Schema.define(version: 20150528185317) do
 
   create_table "emergencies", force: :cascade do |t|
-    t.string   "code"
-    t.integer  "fire_severity"
-    t.integer  "police_severity"
-    t.integer  "medical_severity"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.string  "code"
+    t.integer "fire_severity"
+    t.integer "police_severity"
+    t.integer "medical_severity"
   end
 
-  create_table "responders", force: :cascade do |t|
-    t.string   "type"
-    t.string   "name"
-    t.integer  "capacity"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "emergency_code"
-    t.boolean  "on_duty",        default: false
+  create_table "responders", id: false, force: :cascade do |t|
+    t.string  "type"
+    t.string  "name"
+    t.integer "capacity"
+    t.string  "emergency_code"
+    t.boolean "on_duty",        default: false
   end
 
 end

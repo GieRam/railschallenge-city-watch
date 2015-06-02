@@ -21,12 +21,6 @@ class RespondersController < ApplicationController
     end
   end
 
-  def update
-  end
-
-  def destroy
-  end
-
 private
 
   def responder_params
