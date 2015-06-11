@@ -35,10 +35,17 @@ class RespondersController < ApplicationController
 
   def show
     @responder = Responder.find_by(name: params[:name])
-    respond_to do |format|
-      format.html
-      format.json { render json:
-        { 'responder' => {'on_duty' => @responder.on_duty } }, status: 200 }
+    if @responder.present?
+      respond_to do |format|
+        format.html
+        format.json { render json:
+          { 'responder' => @responder }, status: 200 }
+      end
+    else
+      respond_to do |format|
+        format.html
+        format.json { render json: {}, status: 404 }
+      end
     end
   end
 
