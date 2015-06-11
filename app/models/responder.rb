@@ -5,4 +5,7 @@ class Responder < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :capacity, presence: true, inclusion: 1..5
   validates :type, presence: true
+
+  scope :capacity_all_by_type, -> { group(:type).sum(:capacity) }
+
 end
