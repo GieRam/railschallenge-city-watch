@@ -6,8 +6,7 @@ class RespondersController < ApplicationController
       respond_to do |format|
         if @responder.save
           format.html
-          format.json { render json:
-            { 'responder' => {'type' => @responder.type, 'emergency_code' => @responder.emergency_code, 'name' => @responder.name, 'capacity' => @responder.capacity, 'on_duty' => @responder.on_duty } }, status: 201 }
+          format.json { render json: { 'responder' => @responder }, status: 201 }
         else
           format.html
           format.json { render json: { 'message' => @responder.errors }, status: 422 }
