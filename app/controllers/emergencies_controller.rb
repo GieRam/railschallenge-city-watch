@@ -5,8 +5,7 @@ class EmergenciesController < ApplicationController
       respond_to do |format|
         if @emergency.save
           format.html
-          format.json { render json:
-            { 'emergency' => {'code' => @emergency.code, 'fire_severity' => @emergency.fire_severity, 'police_severity' => @emergency.police_severity, 'medical_severity' => @emergency.medical_severity } }, status: 201 }
+          format.json { render json: { 'emergency' => @emergency }, status: 201 }
         else
           format.html
           format.json { render json: { 'message' => @emergency.errors }, status: 422 }
