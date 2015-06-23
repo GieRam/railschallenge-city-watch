@@ -7,5 +7,8 @@ class Responder < ActiveRecord::Base
   validates :type, presence: true
 
   scope :capacity_all_by_type, -> { group(:type).sum(:capacity) }
+  scope :capacity_all_by_type_available, -> { group(:type).where(emergency_code: nil).sum(:capacity) }
+  scope :capacity_all_by_type_on_duty, -> { group(:type).where(on_duty: true).sum(:capacity) }
+  scope :capacity_all_by_type_on_duty_available, -> { group(:type).where(on_duty: true).where(emergency_code: nil).sum(:capacity) }
 
 end

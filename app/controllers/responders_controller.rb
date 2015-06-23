@@ -21,15 +21,15 @@ class RespondersController < ApplicationController
   end
 
   def index
-    if params[:show] == 'capacity'
-
-    end
-
     @responders = Responder.all
-    respond_to do |format|
-      format.html
-      format.json { render json:
-        { 'responders' =>  @responders } }
+    if params[:show] == 'capacity'
+      responders_capacity(@responders)
+    else
+      respond_to do |format|
+        format.html
+        format.json { render json:
+          { 'responders' =>  @responders } }
+      end
     end
   end
 
@@ -84,5 +84,28 @@ private
 
   def responder_params
     params.require(:responder).permit(:type, :name, :capacity)
+  end
+
+  def responders_capacity(responders)
+    @capacity_all_by_type = responders.capacity_all_by_type
+    @capacity_all_by_available = responders.capacity_all_by_type_available
+    @capacity_all_by_on_duty = responders.capacity_all_by_type_on_duty
+    @capacity_all_by_on_available_on_duty = responders.capacity_all_by_type_on_duty_available
+    @capacity = {}
+    @capacity_all_by_type.keys.each do |key|
+      @capacity_all_by_type.count.times do
+        @capacity[key] = [
+          @capacity_all_by_type[key],
+          @capacity_all_by_available[key],
+          @capacity_all_by_on_duty[key],
+          @capacity_all_by_on_available_on_duty[key]
+        ]
+      end
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json:
+        { 'capacity' =>  @capacity } }
+    end
   end
 end
