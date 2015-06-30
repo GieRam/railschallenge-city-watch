@@ -51,9 +51,7 @@ class RespondersController < ApplicationController
 
   def update
     begin
-      responder_update_params
       @responder = Responder.find_by(name: params[:name])
-      # puts @responder
       respond_to do |format|
         if @responder.update_attribute(:on_duty, true)
           format.html
