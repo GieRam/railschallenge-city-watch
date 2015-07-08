@@ -72,7 +72,7 @@ private
   end
 
   def emergency_params
-    params.require(:emergency).permit(:code, :fire_severity, :police_severity,:medical_severity, :resolved_at)
+    params.require(:emergency).permit(:code, :fire_severity, :police_severity,:medical_severity)
   end
 
 end
