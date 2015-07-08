@@ -1,5 +1,5 @@
 class EmergenciesController < ApplicationController
-  
+
   def show
     @emergency = Emergency.find_by(code: params[:code])
     if @emergency.present?
@@ -13,7 +13,7 @@ class EmergenciesController < ApplicationController
         format.html
         format.json { render json: {}, status: 404 }
       end
-    end  
+    end
   end
 
   def index
@@ -22,7 +22,7 @@ class EmergenciesController < ApplicationController
       format.html
       format.json { render json:
         { 'emergencies' =>  @emergencies } }
-    end       
+    end
   end
 
   def create
@@ -68,7 +68,7 @@ class EmergenciesController < ApplicationController
 private
 
   def emergency_update_params
-    params.require(:emergency).permit(:fire_severity, :police_severity,:medical_severity, :resolved_at)    
+    params.require(:emergency).permit(:fire_severity, :police_severity,:medical_severity, :resolved_at)
   end
 
   def emergency_params
