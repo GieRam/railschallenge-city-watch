@@ -53,7 +53,7 @@ class RespondersController < ApplicationController
     begin
       @responder = Responder.find_by(name: params[:name])
       respond_to do |format|
-        if @responder.update_attribute(:on_duty, true)
+        if @responder.update!(responder_update_params)
           format.html
           format.json { render json:
             { 'responder' => {'on_duty' => @responder.on_duty } }, status: 201 }
